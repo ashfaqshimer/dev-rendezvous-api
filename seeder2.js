@@ -1,0 +1,1 @@
+// Create seeder for courses 
