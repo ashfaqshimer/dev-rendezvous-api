@@ -72,3 +72,49 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
 		data: course
 	});
 });
+
+// @desc    Update a course
+// @route   PUT /api/v1/courses/:id
+// @access  Public
+exports.updateCourse = asyncHandler(async (req, res, next) => {
+	const updatedCourse = await Course.findByIdAndUpdate(
+		req.params.id,
+		req.body,
+		{ new: true, runValidators: true }
+	);
+
+	if (!updatedCourse) {
+		return next(
+			new ErrorResponse(
+				`Course not found with id of ${req.params.id}`,
+				404
+			)
+		);
+	}
+
+	res.status(200).json({
+		success: true,
+		data: updatedCourse
+	});
+});
+
+
+// @desc    Delete a course
+// @route   DELETE /api/v1/courses/:id
+// @access  Public
+exports.deleteCourse = asyncHandler(async (req, res, next) => {
+	const course = await Course.findById(req.params.id);
+
+	if (!course) {
+		return next(
+			new ErrorResponse(
+				`Course not found with id of ${req.params.id}`,
+				404
+			)
+		);
+	}
+
+	course.remove();
+
+	res.status(200).json({ success: true, data: {} });
+});
