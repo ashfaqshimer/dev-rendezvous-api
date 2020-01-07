@@ -88,7 +88,7 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
 
 // @desc    Delete a review
 // @route   DELETE /api/v1/reviews/:id
-// @access  Public
+// @access  Private/Admin
 exports.deleteReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id);
 

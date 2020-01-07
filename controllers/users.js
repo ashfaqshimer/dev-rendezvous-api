@@ -1,6 +1,4 @@
-const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../middleware/asyncHandler');
-const sendEmail = require('../utils/sendEmail');
 const User = require('../models/User');
 
 // @desc    Get all users
